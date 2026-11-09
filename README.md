@@ -1,6 +1,6 @@
 # Aiman Hakim: portfolio website
 
-A single-page personal portfolio for Aiman Hakim bin Zulkarnain, Project/Product Analyst. It is plain HTML, CSS and JavaScript, with no framework, no libraries and **no build step**. The whole website is the `site` folder, and you can upload it as it is to any free static host.
+A single-page personal portfolio for Aiman Hakim, Project/Product Analyst. It is plain HTML, CSS and JavaScript, with no framework, no libraries and **no build step**. The whole website is the `site` folder, and you can upload it as it is to any free static host.
 
 ```
 site/                       <- the folder you deploy
