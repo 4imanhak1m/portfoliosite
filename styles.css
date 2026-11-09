@@ -1,0 +1,391 @@
+/* =====================================================================
+   Aiman Hakim portfolio: styles
+   Palette: #CF4500 orange, #000000 black, #FFFFFF white, #323231 charcoal.
+   Each section has a "tone" class (tone-black / tone-charcoal / tone-white)
+   that sets the colour tokens used by everything inside it.
+   Contents: 1 tokens  2 base  3 nav  4 hero  5 sections  6 about
+             7 experience  8 projects  9 skills  10 education  11 contact
+             12 footer  13 fade bands and washes  14 motion  15 reduced motion
+   ===================================================================== */
+
+/* ---------- 1. Tokens ---------- */
+:root{
+  --orange:#CF4500; --orange-tint:#FF7733; --orange-tint-2:#FFA070; --orange-shade:#B83D00;
+  --black:#000000; --white:#FFFFFF; --charcoal:#323231;
+  --head:"Space Grotesk","Segoe UI",system-ui,-apple-system,sans-serif;
+  --body-font:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --nav-h:68px;
+  --btn-grad:linear-gradient(135deg,#CF4500 0%,#B83D00 50%,#9E3400 100%);
+}
+.tone-black{
+  --sec-bg:#000000; --surface:#323231; --surface-hover:#3B3B3A;
+  --text:#FFFFFF; --body:#D9D9D7; --muted:#B0B0AE;
+  --border:rgba(255,255,255,.14); --border-strong:rgba(255,255,255,.30);
+  --accent-text:#FF7733; --accent-ui:#CF4500; --focus:#FFFFFF;
+  --g1:#CF4500; --g2:#FF7733; --glow:rgba(207,69,0,.55); --spot:rgba(207,69,0,.20);
+  --shadow:none; --nav-hover:#323231;
+}
+.tone-charcoal{
+  --sec-bg:#323231; --surface:#000000; --surface-hover:#121212;
+  --text:#FFFFFF; --body:#D9D9D7; --muted:#B0B0AE;
+  --border:rgba(255,255,255,.14); --border-strong:rgba(255,255,255,.30);
+  --accent-text:#FF7733; --accent-ui:#FF7733; --focus:#FFFFFF;
+  --g1:#FF7733; --g2:#FFA070; --glow:rgba(255,119,51,.45); --spot:rgba(207,69,0,.22);
+  --shadow:none; --nav-hover:#000000;
+}
+.tone-white{
+  --sec-bg:#FFFFFF; --surface:#FFFFFF; --surface-hover:#FFFFFF;
+  --text:#000000; --body:#323231; --muted:#5E5E5C;
+  --border:rgba(50,50,49,.16); --border-strong:rgba(50,50,49,.38);
+  --accent-text:#CF4500; --accent-ui:#CF4500; --focus:#CF4500;
+  --g1:#CF4500; --g2:#B83D00; --glow:rgba(207,69,0,.30); --spot:rgba(207,69,0,.07);
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 12px 30px -18px rgba(0,0,0,.28);
+  --nav-hover:transparent;
+}
+.sec{background:var(--sec-bg);color:var(--text)}
+
+/* ---------- 2. Base ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+html.smooth-scroll{scroll-behavior:smooth}   /* added by script.js after the first jump to a #section */
+body{background:#000;color:#fff;font:16px/1.65 var(--body-font);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:active{color:var(--accent-text)}
+img,svg{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus,#CF4500);outline-offset:3px;border-radius:8px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:-9999px;top:16px;z-index:200;padding:10px 16px;border-radius:8px;background:var(--orange);color:#fff;font-weight:600}
+.skip:focus{left:16px}
+.skip:focus-visible{outline-color:#fff}
+.wrap{width:min(1160px,92%);margin-inline:auto}
+
+/* scroll progress */
+.progress{position:fixed;inset:0 0 auto 0;height:3px;z-index:120;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#CF4500,#FF7733)}
+
+/* ---------- 3. Nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;color:var(--text);background:transparent;border-bottom:1px solid transparent;transition:background-color .3s ease,border-color .3s ease}
+.nav.scrolled{background:rgba(50,50,49,.97);border-color:var(--border)}
+.nav .wrap{display:flex;align-items:center;gap:12px;height:var(--nav-h)}
+.logo{display:flex;align-items:center;gap:10px;margin-right:auto;font:700 18px var(--head);letter-spacing:.02em;color:var(--text)}
+.logo i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-size:15px;color:#fff;background:var(--orange)}
+.nav ul{list-style:none;display:flex;gap:4px}
+.nav ul a{position:relative;display:block;padding:8px 14px;border-radius:8px;color:var(--muted);font-size:14px;transition:color .2s ease,background-color .2s ease}
+.nav ul a:hover{color:var(--text);background:var(--nav-hover)}
+.nav ul a:active{color:var(--accent-text)}
+.nav ul a[aria-current="true"]{color:#fff;font-weight:600}
+.nav ul a::after{content:"";position:absolute;left:14px;right:14px;bottom:2px;height:2px;border-radius:2px;background:var(--accent-ui);transform:scaleX(0);transition:transform .3s var(--ease)}
+.nav ul a[aria-current="true"]::after{transform:scaleX(1)}
+.icon-btn{width:42px;height:42px;flex:none;display:grid;place-items:center;background:transparent;border:1px solid var(--border-strong);color:var(--text);border-radius:10px;cursor:pointer;transition:border-color .2s ease,background-color .2s ease}
+.icon-btn:hover{background:var(--nav-hover)}
+.icon-btn svg{width:16px;height:16px;fill:currentColor}
+.motion-btn[aria-pressed="true"]{border-color:var(--accent-ui)}
+.motion-btn .i-play,.motion-btn[aria-pressed="true"] .i-pause{display:none}
+.motion-btn[aria-pressed="true"] .i-play{display:block}
+.menu-btn{display:none}
+.menu-btn span,.menu-btn span::before,.menu-btn span::after{display:block;width:18px;height:2px;background:currentColor;position:relative;transition:transform .3s ease,background-color .3s ease,top .3s ease}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0}
+.menu-btn span::before{top:-6px}
+.menu-btn span::after{top:6px}
+.menu-btn[aria-expanded="true"] span{background:transparent}
+.menu-btn[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
+/* without JavaScript the pause and menu buttons cannot work, so they are hidden (the page is still read by scrolling) */
+html:not(.js) .motion-btn,html:not(.js) .menu-btn{display:none!important}
+@media (max-width:900px){
+  .menu-btn{display:grid}
+  .nav ul{position:fixed;inset:var(--nav-h) 0 auto 0;flex-direction:column;padding:16px 4%;background:var(--sec-bg);border-bottom:1px solid var(--border);transform:translateY(-8px);opacity:0;visibility:hidden;transition:transform .25s ease,opacity .25s ease,visibility 0s linear .25s}
+  .nav ul.open{transform:none;opacity:1;visibility:visible;transition:transform .25s ease,opacity .25s ease}
+  .nav ul a{padding:12px 16px;font-size:16px}
+  .nav ul a::after{left:16px;right:auto;width:28px;bottom:6px}
+}
+
+/* ---------- 4. Hero ---------- */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;isolation:isolate;padding:110px 0 80px}
+#net{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.aurora{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.aurora span{position:absolute;width:55vw;height:55vw;border-radius:50%;filter:blur(90px);opacity:.30;animation:drift 18s ease-in-out infinite alternate}
+.aurora span:nth-child(1){background:#CF4500;top:-25%;left:-15%}
+.aurora span:nth-child(2){background:#FF7733;bottom:-35%;right:-20%;animation-delay:-9s}
+/* the haze and canvas fade out over the hero's last 25%, so the hero ends on flat #000 where the fade band starts */
+.hero .aurora,.hero #net{-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 75%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 75%,transparent 100%)}
+/* photo LEFT, text RIGHT: the text comes first in the DOM, the photo is moved left with order:-1 */
+.hero-grid{display:grid;grid-template-columns:.85fr 1.25fr;gap:64px;align-items:center}
+.hero-text{min-width:0}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:500 13px var(--mono);color:var(--accent-text);border:1px solid var(--border-strong);padding:6px 14px;border-radius:999px;margin-bottom:22px}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--accent-ui)}
+h1{font:700 clamp(44px,6.4vw,92px)/1 var(--head);letter-spacing:-.04em;white-space:nowrap}
+h1 .line{display:block;overflow:hidden;padding-bottom:.08em}
+h1 .line>span{display:inline-block;animation:rise .9s var(--ease) both}
+.lede{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:560px;margin:22px 0 14px}
+.lede b{color:var(--text);font-weight:600}
+.typed{color:var(--muted);font:14px/1.6 var(--mono);min-height:3.2em}
+.typed .k{color:var(--accent-text)}
+.caret{display:inline-block;width:8px;height:1.05em;background:var(--accent-ui);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(1) infinite}
+.ctas{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:14px 24px;border-radius:12px;font:600 15px var(--body-font);border:1px solid transparent;cursor:pointer;transition:transform .2s ease,box-shadow .3s ease,background-position .3s ease,background-color .3s ease,border-color .3s ease}
+.btn:active{scale:.98}
+.btn.primary{color:#fff;background:var(--btn-grad);background-size:200% 100%;background-position:0% 0;box-shadow:0 10px 30px -10px rgba(207,69,0,.55)}
+.btn.primary:hover{background-position:100% 0;box-shadow:0 14px 40px -8px rgba(207,69,0,.55)}
+.btn.ghost{background:transparent;color:var(--text);border-color:rgba(255,255,255,.30)}
+.btn.ghost:hover{border-color:#CF4500;background:#323231}
+
+/* portrait */
+.portrait{position:relative;order:-1;justify-self:start;width:min(380px,100%);aspect-ratio:3/4;isolation:isolate}
+.portrait::before{content:"";position:absolute;inset:-18px;border-radius:44px;background:radial-gradient(closest-side,rgba(207,69,0,.55),transparent);filter:blur(18px);opacity:.8;z-index:-1}
+.portrait .ring{position:absolute;inset:-3px;border-radius:30px;overflow:hidden}
+.portrait .ring::before{content:"";position:absolute;inset:-50%;background:conic-gradient(#CF4500,#FF7733,#323231,#CF4500);animation:spin 6s linear infinite}
+/* 15% zoom trims the bright ceiling band. Never mirrored. */
+.portrait .photo{position:relative;width:100%;height:100%;border-radius:28px;border:3px solid #000;overflow:hidden;background:#000}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:40% 45%;transform:scale(1.15);transform-origin:40% 60%}
+.chip{--accent-ui:#FF7733;position:absolute;font:500 12.5px var(--mono);padding:8px 12px;border-radius:12px;background:rgba(50,50,49,.92);color:#fff;border:1px solid rgba(255,255,255,.14);white-space:nowrap;animation:float 5s ease-in-out infinite}
+.chip b{color:#FF7733}
+.chip.c1{left:-10%;bottom:12%}
+.chip.c2{right:-16%;top:52%;animation-delay:-2.5s}
+.scrollcue{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font:12px var(--mono);color:var(--muted)}
+.scrollcue::after{content:"";width:1px;height:38px;background:linear-gradient(var(--accent-ui),transparent);transform-origin:top;animation:cue 2s ease-in-out infinite}
+@media (max-width:900px){
+  .hero-grid{gap:36px}
+  .scrollcue{display:none}
+  .chip.c2{right:-6%}
+}
+@media (max-width:640px){
+  .hero-grid{grid-template-columns:1fr;gap:32px}
+  .portrait{width:100%;aspect-ratio:5/4}
+  .portrait img{object-position:40% 40%}
+  .chip{display:none}
+}
+
+/* ---------- 5. Sections ---------- */
+section{position:relative;scroll-margin-top:var(--nav-h)}
+section.sec:not(.hero){padding:110px 0}
+/* a side that touches a fade band uses 56px, because the band already provides the space (ids win over the rule above) */
+#about,#projects,#skills,#contact{padding-top:56px}
+#experience,#projects,#education,#contact{padding-bottom:56px}
+.sec-head{margin-bottom:48px}
+.idx{font:500 13px var(--mono);color:var(--accent-text)}
+h2{font:700 clamp(30px,4vw,46px)/1.1 var(--head);letter-spacing:-.02em;margin-top:8px}
+.sec-head p{color:var(--muted);max-width:620px;margin-top:12px}
+.grad{background:linear-gradient(90deg,var(--g1),var(--g2),var(--g1));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+.meta{font:13px var(--mono);color:var(--muted)}
+@media (max-width:620px){
+  section.sec:not(.hero){padding:80px 0}
+  .sec-head{margin-bottom:36px}
+}
+
+/* ---------- 6. About ---------- */
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}
+.about-grid>p{color:var(--body)}
+.quote{border-left:3px solid #CF4500;padding:4px 0 4px 20px;font:500 18px/1.6 var(--head);color:var(--text)}
+.goal{margin-top:28px;padding:20px 22px;border-radius:16px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow)}
+.goal-h{display:flex;align-items:center;gap:10px;margin-bottom:8px;font:600 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#CF4500}
+.goal-h::before{content:"";width:8px;height:8px;border-radius:50%;background:#CF4500;box-shadow:0 0 0 4px rgba(207,69,0,.07)}
+.goal p{color:#323231;font-size:16px}
+.goal strong{color:#000;font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+.stat{position:relative;overflow:hidden;padding:26px 22px;border-radius:18px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow)}
+.stat::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--g1),var(--g2));transform-origin:left;transition:transform 1.2s var(--ease) .2s}
+.js .stat::before{transform:scaleX(0)}
+.js .stat.in::before{transform:scaleX(1)}
+.stat .num{font:700 clamp(34px,4vw,48px)/1 var(--head);font-variant-numeric:tabular-nums}
+.stat .num small{font-size:.55em;color:var(--accent-text);margin-left:2px}
+.stat .lbl{color:var(--muted);font-size:14px;margin-top:10px}
+@media (max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:32px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ---------- 7. Experience ---------- */
+.timeline{position:relative;padding-left:44px}
+.timeline .track{position:absolute;left:11px;top:6px;bottom:6px;width:2px;border-radius:2px;background:var(--border)}
+.timeline .fill{position:absolute;inset:0;border-radius:2px;background:linear-gradient(#CF4500,#B83D00);transform-origin:top}
+.js .timeline .fill{transform:scaleY(0)}
+.job{position:relative;margin-bottom:28px;padding:28px;border-radius:20px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);transition:border-color .3s ease,background-color .3s ease}
+.job:last-child{margin-bottom:0}
+.job:hover{border-color:var(--accent-ui);background:var(--surface-hover)}
+.job::before{content:"";position:absolute;left:-41px;top:34px;width:16px;height:16px;border-radius:50%;background:#FFFFFF;border:2px solid var(--muted);transition:border-color .4s ease,box-shadow .4s ease}
+.job.in::before{border-color:#CF4500;box-shadow:0 0 0 6px var(--spot),0 0 18px var(--glow)}
+.job-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 16px}
+.job h3{font:600 21px/1.3 var(--head)}
+.job .co{color:var(--accent-text);font-weight:600}
+.dur:not(:empty)::before{content:" · "}
+.job ul{margin:16px 0 0 18px;color:var(--body)}
+.job li{margin-bottom:8px}
+.job li:last-child{margin-bottom:0}
+.job li::marker{color:var(--accent-ui)}
+.job li b{color:var(--text);font-weight:600}
+.now{display:inline-block;margin-left:4px;padding:2px 8px;border-radius:999px;font:600 11px var(--mono);color:#fff;background:#CF4500;vertical-align:3px}
+@media (max-width:620px){
+  .timeline{padding-left:34px}
+  .timeline .track{left:7px}
+  .job{padding:22px}
+  .job::before{left:-31px}
+}
+
+/* ---------- 8. Projects (charcoal band) ---------- */
+#projects{--accent-text:#FFA070;overflow:hidden;isolation:isolate}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.filters button{min-height:40px;padding:9px 18px;border-radius:999px;font:500 14px var(--body-font);color:var(--muted);background:transparent;border:1px solid var(--border-strong);cursor:pointer;transition:color .25s ease,border-color .25s ease,background-color .25s ease}
+.filters button:hover{color:#fff;border-color:#FF7733}
+.filters button[aria-pressed="true"]{color:#fff;background:#CF4500;border-color:#FF7733}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{position:relative;display:flex;flex-direction:column;overflow:hidden;padding:26px;border-radius:20px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow)}
+.card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),var(--spot),transparent 45%);opacity:0;transition:opacity .3s ease}
+.card:hover::before{opacity:1}
+.card:hover{border-color:#FF7733}
+.card[hidden]{display:none}
+.tag{align-self:flex-start;margin-bottom:16px;padding:3px 10px;border-radius:999px;border:1px solid;font:600 11.5px var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.tag.ai{color:#fff;background:#CF4500;border-color:#CF4500}
+.tag.gov{color:var(--accent-text);border-color:#FF7733}
+.tag.data{color:#D9D9D7;border-color:rgba(255,255,255,.30)}
+.card h3{font:600 20px/1.3 var(--head);margin-bottom:4px}
+.card .client{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.card p,.card li{font-size:15px;color:var(--body)}
+.card ul{margin-left:18px}
+.card li{margin-bottom:6px}
+.card li::marker{color:var(--accent-ui)}
+.card .hl{align-self:flex-start;margin-top:auto;padding-top:14px;font:600 12.5px var(--mono);color:var(--accent-text)}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.grid{grid-template-columns:1fr}}
+
+/* ---------- 9. Skills & languages ---------- */
+.sub-h{font:600 20px var(--head);margin:48px 0 16px}
+.sub-h.first{margin-top:0}
+.mq-group:focus-visible{outline:2px solid var(--focus);outline-offset:6px;border-radius:14px}
+.mq{position:relative;overflow:hidden;padding:6px 0;border-radius:14px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.mq+.mq{margin-top:12px}
+.mq-inner{display:flex;width:max-content}
+.mq ul{display:flex;gap:12px;padding-right:12px;list-style:none;flex:none}
+/* the loop only runs once script.js has added the copies (.ready) */
+.mq.ready .mq-inner{animation:marquee var(--mq-dur,45s) linear infinite}
+.mq.rev.ready .mq-inner{animation-direction:reverse}
+.mq:hover .mq-inner,.mq-group:focus .mq-inner,.mq-group:focus-within .mq-inner{animation-play-state:paused}
+.skill{display:flex;align-items:center;gap:10px;white-space:nowrap;padding:10px 16px;border-radius:12px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);font-size:14.5px;color:var(--text);transition:border-color .2s ease,transform .2s ease}
+.skill::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:#CF4500}
+.skill:hover{border-color:#CF4500;transform:translateY(-2px)}
+/* without JavaScript the rows show as one static wrapped grid */
+html:not(.js) .mq{-webkit-mask-image:none;mask-image:none;padding:0;overflow:visible}
+html:not(.js) .mq-inner{display:block;width:auto}
+html:not(.js) .mq ul{flex-wrap:wrap;padding-right:0}
+.langs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;list-style:none}
+.langs li{padding:16px 18px;border-radius:16px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);transition:border-color .3s ease}
+.langs li:hover{border-color:#CF4500}
+.langs b{display:block;font:600 17px var(--head)}
+.langs span{font:500 12.5px var(--mono);color:#CF4500}
+.langs span.el{color:#5E5E5C}
+@media (max-width:1100px){.langs{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:620px){.langs{grid-template-columns:1fr 1fr}}
+
+/* ---------- 10. Education ---------- */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{padding:24px;border-radius:20px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);transition:border-color .3s ease}
+.panel:hover{border-color:#CF4500}
+.panel h3{font:600 17px var(--head);margin:0 0 14px;color:#CF4500}
+.edu-item{padding:18px 0;border-top:1px solid var(--border)}
+.panel h3+.edu-item{border-top:0;padding-top:0}
+.edu-item h4{font:600 17px/1.35 var(--head)}
+.edu-item p{color:var(--muted);font-size:14.5px;margin-top:4px}
+.badge{display:inline-block;margin-top:8px;padding:3px 10px;border-radius:999px;border:1px solid;font:500 11.5px var(--mono)}
+.badge.id{color:#CF4500;border-color:#CF4500}
+.badge.prog{color:#323231;border-color:var(--border-strong)}
+@media (max-width:820px){.edu-grid{grid-template-columns:1fr}}
+
+/* ---------- 11. Contact composer ---------- */
+#contact{overflow:hidden;isolation:isolate}
+/* inside the charcoal composer, orange graphics use #FF7733 */
+.composer{--accent-ui:#FF7733;max-width:760px;padding:28px;border-radius:20px;border:1.5px solid transparent;
+  background:radial-gradient(ellipse at top,rgba(207,69,0,.12),transparent 60%) padding-box,linear-gradient(#323231,#323231) padding-box,linear-gradient(90deg,#CF4500,#FF7733,#323231,#FF7733,#CF4500) border-box;
+  background-size:100% 100%,100% 100%,300% 100%;
+  box-shadow:0 30px 80px -40px var(--glow);animation:borderflow 9s linear infinite}
+.composer-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.composer-head h3{display:flex;align-items:center;gap:10px;font:600 18px var(--head);color:#fff}
+.composer-head h3::before{content:"";width:8px;height:8px;border-radius:50%;background:#FF7733;box-shadow:0 0 10px var(--glow)}
+.hint{font:12.5px var(--mono);color:var(--muted)}
+.fields .field{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:8px 12px;padding:14px 0;border-bottom:1px solid var(--border)}
+.fields dt{font:500 13px var(--mono);color:var(--muted)}
+.fields dd{display:flex;align-items:center;flex-wrap:wrap;gap:10px;min-width:0}
+.addr{min-width:0;font:600 16px var(--mono);color:#fff;word-break:break-all;background:linear-gradient(#FF7733,#FF7733) 0 100%/0 2px no-repeat;transition:background-size .3s var(--ease),color .2s ease}
+.addr:hover{color:#FF7733;background-size:100% 2px}
+.addr svg{display:inline-block;width:13px;height:13px;vertical-align:-1px;margin-left:4px;stroke:currentColor;fill:none;stroke-width:2}
+.mini{min-height:32px;padding:6px 12px;border-radius:8px;font:500 13px var(--body-font);color:#fff;background:transparent;border:1px solid rgba(255,255,255,.30);cursor:pointer;transition:background-color .2s ease,border-color .2s ease,color .2s ease}
+.mini:hover{border-color:#FF7733}
+.mini.ok{background:#CF4500;color:#fff;border-color:#FF7733}
+.draft{min-height:84px;padding:18px 0 10px;color:var(--muted);font-size:15.5px}
+.draft .cur{display:inline-block;width:2px;height:1.1em;background:#FF7733;vertical-align:-3px;margin-left:1px;animation:blink 1s steps(1) infinite}
+.draft .cur.off{display:none}
+.composer .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.composer .btn.primary{border-color:#FF7733}
+@media (max-width:520px){
+  .composer{padding:20px}
+  .fields .field{grid-template-columns:1fr;gap:6px}
+}
+
+/* ---------- 12. Footer ---------- */
+footer.sec{padding:32px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer nav{display:flex;gap:18px}
+footer a{color:#B0B0AE;transition:color .2s ease}
+footer a:hover{color:#FF7733}
+
+/* ---------- 13. Fade bands and washes (decorative, never carry text) ---------- */
+/* Each band starts and ends on exactly its neighbour's colour; ramps are smoothstep stops every 10%. */
+.fade{position:relative;overflow:hidden;pointer-events:none}
+.fade-hero{height:clamp(160px,22vw,320px);background:radial-gradient(60% 40% at 30% 50%,rgba(207,69,0,.18),transparent 100%),linear-gradient(180deg,#000000 0%,#070707 10%,#1B1B1A 20%,#373736 30%,#5A5A59 40%,#808080 50%,#A5A5A4 60%,#C8C8C7 70%,#E5E5E4 80%,#F8F8F8 90%,#FFFFFF 100%)}
+.fade-to-charcoal{height:clamp(120px,16vw,240px);background:linear-gradient(180deg,#FFFFFF 0%,#F9F9F9 10%,#EAEAE9 20%,#D3D3D2 30%,#B7B7B6 40%,#999998 50%,#7A7A79 60%,#5E5E5D 70%,#474746 80%,#383837 90%,#323231 100%)}
+.fade-from-charcoal{height:clamp(120px,16vw,240px);background:linear-gradient(180deg,#323231 0%,#383837 10%,#474746 20%,#5E5E5D 30%,#7A7A79 40%,#999998 50%,#B7B7B6 60%,#D3D3D2 70%,#EAEAE9 80%,#F9F9F9 90%,#FFFFFF 100%)}
+.fade-to-black{height:clamp(160px,22vw,320px);background:radial-gradient(55% 40% at 70% 50%,rgba(207,69,0,.16),transparent 100%),linear-gradient(180deg,#FFFFFF 0%,#F8F8F8 10%,#E5E5E4 20%,#C8C8C7 30%,#A5A5A4 40%,#808080 50%,#5A5A59 60%,#373736 70%,#1B1B1A 80%,#070707 90%,#000000 100%)}
+.fade-foot{height:96px;background:linear-gradient(180deg,#000000 0%,#080808 25%,#191918 50%,#2A2A29 75%,#323231 100%)}
+/* travelling glow: enters and leaves off-screen, so the loop restart is invisible */
+.fade::after{content:"";position:absolute;top:0;bottom:0;left:0;width:60%;background:radial-gradient(50% 50% at 50% 50%,rgba(207,69,0,.45),rgba(255,119,51,.18) 45%,transparent 75%);transform:translateX(-100%);animation:travel 16s ease-in-out infinite}
+.fade-from-charcoal::after{animation-duration:19s;animation-direction:reverse}
+.fade-to-black::after{animation-duration:21s;animation-delay:-7s}
+.fade-foot::after{opacity:.6;animation-duration:24s}
+/* dark-zone washes: a static masked container, with the drifting layer inside it */
+.wash{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 22%,#000 78%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 22%,#000 78%,transparent 100%)}
+.wash i{position:absolute;inset:-25%;animation:wash 26s ease-in-out infinite alternate}
+#projects .wash i{background:radial-gradient(32% 38% at 22% 40%,rgba(207,69,0,.18),transparent 70%),radial-gradient(34% 40% at 78% 62%,rgba(0,0,0,.40),transparent 70%)}
+#contact .wash i{animation-duration:30s;animation-direction:alternate-reverse;background:radial-gradient(32% 38% at 75% 40%,rgba(207,69,0,.18),transparent 70%),radial-gradient(36% 42% at 20% 62%,rgba(50,50,49,.50),transparent 70%)}
+
+/* ---------- 14. Motion ---------- */
+@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes shine{to{background-position:200% center}}
+@keyframes blink{50%{opacity:0}}
+@keyframes drift{to{transform:translate(8vw,6vh) scale(1.15)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{50%{transform:translateY(-10px)}}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes travel{from{transform:translateX(-100%)}to{transform:translateX(170%)}}
+@keyframes wash{0%{transform:translate(-6%,-4%) rotate(0deg)}50%{transform:translate(5%,3%) rotate(8deg)}100%{transform:translate(-3%,5%) rotate(-6deg)}}
+@keyframes borderflow{from{background-position:0 0,0 0,0 0}to{background-position:0 0,0 0,150% 0}}
+
+/* section reveals (only when JavaScript runs) */
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+.js .card.done{transition:transform .25s ease,opacity .28s var(--ease),border-color .3s ease}
+.js .card.out{opacity:0;transform:scale(.95)}
+
+/* nav pause control: freezes every looping animation */
+.motion-paused .aurora span,.motion-paused .grad,.motion-paused .portrait .ring::before,.motion-paused .chip,
+.motion-paused .caret,.motion-paused .scrollcue::after,.motion-paused .draft .cur,.motion-paused .mq-inner,
+.motion-paused .fade::after,.motion-paused .wash i,.motion-paused .composer{animation-play-state:paused!important}
+
+/* ---------- 15. Reduced motion: everything static and visible ---------- */
+@media (prefers-reduced-motion:reduce){
+  html.smooth-scroll{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .motion-btn{display:none}
+  .js .reveal{opacity:1;transform:none}
+  .js .stat::before{transform:scaleX(1)}
+  .js .timeline .fill{transform:scaleY(1)}
+  .draft .cur{display:none}
+  /* the two skill lists wrap with the same 12px gap, so they read as one grid */
+  .mq{-webkit-mask-image:none;mask-image:none;padding:0;overflow:visible}
+  .mq-inner{display:block;width:auto}
+  .mq ul{flex-wrap:wrap;padding-right:0}
+  .mq ul[aria-hidden="true"]{display:none}
+}
